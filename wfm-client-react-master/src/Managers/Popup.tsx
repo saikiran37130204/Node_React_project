@@ -1,12 +1,26 @@
 import {Modal,Button} from 'react-bootstrap';
 import axios from "axios";
+import { useState } from 'react';
 
-export default function PopupModal(props:any){
+ const PopupModal=(props:any)=>{
+   const[text,Settext]=useState("");
+   function handlechange(event:any){
+
+    const textarea = event.target.value;
+   
+
+    Settext(textarea)
+   }
   async function UpdateEmployee() {
     try
      {
-        const response = await axios.put("http://localhost:8000/manager/updateemployees",{ employeeid : parseInt(props.id)});
-        console.log(response);
+        const response = await axios.put("http://localhost:8000/manager/updateEmpStatus",{ employeeid : parseInt(props.id)});
+        if(response.status === 200){
+
+          const res = await axios.post("http://localhost:8000/manager/insertSoftlock",
+  
+          { employeeid: parseInt(props.id),manager: localStorage.getItem("username"),responsemessage: text});
+        }
     } 
     catch (e) 
     {
@@ -23,14 +37,18 @@ export default function PopupModal(props:any){
                  <div>
                    <h6>Please confirm the lock request for {props.id}</h6>
                    <h6>Request Message</h6>
-                   <textarea    rows={5} cols={50}  />
+                   <textarea value={text} onChange={handlechange}   rows={5} cols={50}  />
                  </div>
              </Modal.Body>
              <Modal.Footer>
                <Button variant="secondary" onClick={props.toggle}> Cancel </Button>
-               <Button variant="primary" onClick={UpdateEmployee}>Send Request </Button>
+               <Button variant="primary" onClick={()=>{UpdateEmployee();props.toggle();}}>Send Request </Button>
              </Modal.Footer>
             </Modal>
         </div>     
     )
 }
+
+
+export default PopupModal;
+

@@ -1,6 +1,6 @@
 import Login from "../Login";
 
-import Manager from "./wfmManagerTable";
+import Manager from "./WFMManagerTable";
 
 
 

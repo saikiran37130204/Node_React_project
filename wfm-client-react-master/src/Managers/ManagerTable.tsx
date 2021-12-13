@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { managers } from "./type";
-import PopupModal from "./PopupModal";
+import PopupModal from "./Popup";
 
 const Manager = () => {
   const username = localStorage.getItem("username");

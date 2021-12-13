@@ -1,96 +1,66 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
+import { WfmManagerTable } from "./type";
+import WFMPopup from "./WFMPopup";
 
-import { wfmmanagers } from "./type";
-
-
-
-const Manager = () => {
-
+const WFMManager = () => {
   const username = localStorage.getItem("username");
 
-  async function GetManagerTable() {
-
+  async function GetWFMManagerTable() {
     try {
-
-      const response = await axios.post("http://localhost:8000/manager/wfmmanager",{ username: username });
-
-      setManagerData(response.data);
-
-      console.log(response.data);
-
+      const response = await axios.post("http://localhost:8000/manager/wfmtable",{ username: username });
+      setWFMManagerData(response.data);
     } catch (e) {
-
       console.log("Error");
-
     }
-
   }
-
-
- function buttonClick(){
-     Setshow(!show)
-
-  }
-
+  
   useEffect(() => {
-    GetManagerTable();
-
+    GetWFMManagerTable();
   });
-  const [ManagerData, setManagerData] = useState([]);
 
-  // const [show,Setshow] = useState(false)
+  function handleClick(event:any) {
+    Setshow(!show)
+    if(show !== true){
+        const id = event.target.id;
+        setId(id);
+    }
+}
 
-  const [show,Setshow] = useState(true)
-
-
+  const [WFMManagerData, setWFMManagerData] = useState([]);
+  const [show,Setshow] = useState(false);
+  const [id,setId] = useState(0)
 
   return (
-
     <table className="table">
-
       <thead>
-
         <tr>
-
           <th>EmployeeID</th>
-
           <th>Requestee</th>
-
-          <th>EmployeeManager</th>
-
+          <th>Req Date</th>
+          <th>Req Message</th>
           <th>Status</th>
-
         </tr>
-
       </thead>
-
       <tbody>
-
-{ManagerData.map((x: wfmmanagers) => {
-
-  return (
-      <tr key={x.EmployeeID}>
-          <td>{x.EmployeeID}</td>
-          <td>{x.Requestee}</td>
-           <td>{x.EmployeeManager}</td>
-           <td>
-              <button className="btn btn-primary" onClick={buttonClick}>View Details</button>
-          </td>
-      </tr>
+      {WFMManagerData.map((x: WfmManagerTable) => {
+          let id = (x.EmployeeID)+','+(x.Name)+','+(x.ReqMessage)
+          return (
+              <tr>
+                <td>{x.EmployeeID}</td>
+                <td>{x.Name}</td>
+                <td>{x.ReqDate}</td>
+                <td>{x.ReqMessage}</td>
+                <td>
+                  <button id={id} className="btn btn-primary" onClick={handleClick}>{x.Status}</button>
+                </td>
+                <WFMPopup show={show} toggle={handleClick} id={id}/>
+              </tr>              
+          );
+        })}
+      </tbody>
+    </table>
   );
+      };
 
-})}
-
-</tbody>
-
-</table>
-
-);
-
-};
-
-
-
-export default Manager;
+export default WFMManager;
