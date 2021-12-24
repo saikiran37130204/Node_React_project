@@ -14,10 +14,10 @@ import { useState } from 'react';
   async function UpdateEmployee() {
     try
      {
-        const response = await axios.put("http://localhost:8000/manager/updateEmpStatus",{ employeeid : parseInt(props.id)});
+        const response = await axios.put("http://localhost:8000/manager/updateemployees",{ employeeid : parseInt(props.id)});
         if(response.status === 200){
 
-          const res = await axios.post("http://localhost:8000/manager/insertSoftlock",
+          const res = await axios.post("http://localhost:8000/manager/insertsoftlock",
   
           { employeeid: parseInt(props.id),manager: localStorage.getItem("username"),responsemessage: text});
         }
@@ -51,4 +51,3 @@ import { useState } from 'react';
 
 
 export default PopupModal;
-

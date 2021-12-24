@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { WfmManagerTable } from "./type";
-import WFMPopup from "./WFMPopup";
+import { WFMmanagers } from "./type";
+import WFMPopupModal from "./WFMPopup";
+
 
 const WFMManager = () => {
   const username = localStorage.getItem("username");
@@ -43,7 +44,7 @@ const WFMManager = () => {
         </tr>
       </thead>
       <tbody>
-      {WFMManagerData.map((x: WfmManagerTable) => {
+      {WFMManagerData.map((x: WFMmanagers) => {
           let id = (x.EmployeeID)+','+(x.Name)+','+(x.ReqMessage)
           return (
               <tr>
@@ -54,13 +55,13 @@ const WFMManager = () => {
                 <td>
                   <button id={id} className="btn btn-primary" onClick={handleClick}>{x.Status}</button>
                 </td>
-                <WFMPopup show={show} toggle={handleClick} id={id}/>
+                <WFMPopupModal show={show} toggle={handleClick} id={id}/>
               </tr>              
           );
         })}
       </tbody>
     </table>
   );
-      };
+};
 
 export default WFMManager;

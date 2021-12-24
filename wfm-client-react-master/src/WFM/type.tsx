@@ -1,4 +1,4 @@
-export type WfmManagerTable = {
+export type WFMmanagers = {
   EmployeeID: number;
   Name: string;
   ReqDate:Date;
