@@ -28,18 +28,18 @@ const WFMPopupModal = (props:any)=> {
         <div className="modal">
            <Modal show={props.show} onHide={props.toggle}>
              <Modal.Header closeButton>
-                 <Modal.Title>Soft Lock Request Confirmation</Modal.Title>
+                 <Modal.Title style={{color:'blue'}}>Soft Lock Request Confirmation</Modal.Title>
              </Modal.Header>
              <Modal.Body>
-                 <div>
-                    <h6>Status Update For Request Lock</h6> 
-                    <h5>Employee ID: {Array[0]}</h5> 
-                    <h5>Requestee: {Array[1]} </h5>
-                    <h5>Request Description: {Array[2]}</h5>
-                    <h5>Status:</h5>
-                   <select name="res" id="res" onChange={handlechange}>
-                      <option value="Accepted">Accepted</option>
-                      <option value="Rejected">Rejected</option>
+                 <div >
+                    <h6 style={{color:'blue'}}>Status Update For Request Lock</h6> 
+                    <h5 style={{color:'blue'}}>Employee ID: {Array[0]}</h5> 
+                    <h5 style={{color:'blue'}}>Requestee: {Array[1]} </h5>
+                    <h5 style={{color:'blue'}}>Request Description: {Array[2]}</h5>
+                    <h5 style={{color:'blue'}}> Status:</h5>
+                   <select name="res" id="res" style={{color:'green'}} onChange={handlechange}>
+                      <option value="Accepted" style={{color:'green'}}>Accepted</option>
+                      <option value="Rejected" style={{color:'red'}}>Rejected</option>
                    </select>
                  </div>
              </Modal.Body>

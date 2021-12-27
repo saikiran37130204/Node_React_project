@@ -31,11 +31,11 @@ import { useState } from 'react';
         <div className="modal">
            <Modal show={props.show} onHide={props.toggle}>
              <Modal.Header closeButton>
-                 <Modal.Title>Soft Lock Request Confirmation</Modal.Title>
+                 <Modal.Title style={{color:'blue'}}>Soft Lock Request Confirmation</Modal.Title>
              </Modal.Header>
              <Modal.Body>
                  <div>
-                   <h6>Please confirm the lock request for {props.id}</h6>
+                   <h6 style={{color:'blue'}}>Please confirm the lock request for {props.id}</h6>
                    <h6>Request Message</h6>
                    <textarea value={text} onChange={handlechange}   rows={5} cols={50}  />
                  </div>
